@@ -3,13 +3,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SystemInfoService } from '../../services/system-info.service';
 
 @Component({
-  selector: 'app-system',
-  templateUrl: './system.component.html',
-  styleUrls: ['./system.component.css']
+  selector: 'app-disks',
+  templateUrl: './disks.component.html',
+  styleUrls: ['./disks.component.css']
 })
-export class SystemComponent implements OnInit, OnDestroy {
+export class DisksComponent implements OnInit, OnDestroy {
 
-  public systemData: object = null;
+  public disksData: object = null;
   private intervalUpdate: any = null;
 
   constructor( private _SystemInfoService: SystemInfoService ) { }
@@ -17,7 +17,7 @@ export class SystemComponent implements OnInit, OnDestroy {
   private showData(): void {
     this.getFromServices().subscribe(response => {
 
-      this.systemData = response[3];
+      this.disksData = response[6];
 
     }, error => {
      console.error('ERROR: Unexpected response');
@@ -37,5 +37,4 @@ export class SystemComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.intervalUpdate);
   }
-
 }

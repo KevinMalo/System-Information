@@ -2,14 +2,15 @@ import { Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SystemInfoService } from '../../services/system-info.service';
 
-@Component({
-  selector: 'app-system',
-  templateUrl: './system.component.html',
-  styleUrls: ['./system.component.css']
-})
-export class SystemComponent implements OnInit, OnDestroy {
 
-  public systemData: object = null;
+@Component({
+  selector: 'app-os',
+  templateUrl: './os.component.html',
+  styleUrls: ['./os.component.css']
+})
+export class OsComponent implements OnInit, OnDestroy {
+
+  public osData: object = null;
   private intervalUpdate: any = null;
 
   constructor( private _SystemInfoService: SystemInfoService ) { }
@@ -17,7 +18,8 @@ export class SystemComponent implements OnInit, OnDestroy {
   private showData(): void {
     this.getFromServices().subscribe(response => {
 
-      this.systemData = response[3];
+      this.osData = response[4];
+
 
     }, error => {
      console.error('ERROR: Unexpected response');

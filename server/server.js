@@ -11,13 +11,16 @@ app.get('/', async function (req, res) {
   async function allData() {
     try {
 
-
         const cpuData = await si.cpu();
         const memData = await si.mem();
         const batteryData = await si.battery();
         const systemData = await si.system();
+        const osData = await si.osInfo();
+        const graphicsData = await si.graphics();
+        const diskData = await si.diskLayout();
 
-        return [ cpuData, memData, batteryData, systemData ];
+        return [ cpuData, memData, batteryData, systemData, osData, graphicsData,
+           diskData ];
 
     } catch (e) {
         console.log(e)
@@ -30,6 +33,4 @@ app.get('/', async function (req, res) {
 
 app.listen(4000, function () {
   console.log('API inicializada en el puerto 4000');
-  //si.cpu().then(data => console.log(data));
-
 });

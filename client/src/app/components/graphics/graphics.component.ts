@@ -3,13 +3,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SystemInfoService } from '../../services/system-info.service';
 
 @Component({
-  selector: 'app-system',
-  templateUrl: './system.component.html',
-  styleUrls: ['./system.component.css']
+  selector: 'app-graphics',
+  templateUrl: './graphics.component.html',
+  styleUrls: ['./graphics.component.css']
 })
-export class SystemComponent implements OnInit, OnDestroy {
+export class GraphicsComponent implements OnInit,  OnDestroy {
 
-  public systemData: object = null;
+
+  public graphicsData: object = null;
   private intervalUpdate: any = null;
 
   constructor( private _SystemInfoService: SystemInfoService ) { }
@@ -17,7 +18,8 @@ export class SystemComponent implements OnInit, OnDestroy {
   private showData(): void {
     this.getFromServices().subscribe(response => {
 
-      this.systemData = response[3];
+      this.graphicsData = response[5];
+
 
     }, error => {
      console.error('ERROR: Unexpected response');
