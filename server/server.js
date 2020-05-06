@@ -4,11 +4,32 @@ var cors = require('cors');
 var app = express();
 
 app.use(cors());
-app.get('/', function (req, res) {
-  si.mem().then(data =>  res.send( data ) );
+app.get('/', async function (req, res) {
+
+  let data = await allData();
+  
+  async function allData() {
+    try {
+
+
+        const cpuData = await si.cpu();
+        const memData = await si.mem();
+        const batteryData = await si.battery();
+        const systemData = await si.system();
+
+        return [ cpuData, memData, batteryData, systemData ];
+
+    } catch (e) {
+        console.log(e)
+    }
+  }
+
+  res.send( data );
+
 });
 
 app.listen(4000, function () {
   console.log('API inicializada en el puerto 4000');
-  si.mem().then(data => console.log(data));
+  //si.cpu().then(data => console.log(data));
+
 });

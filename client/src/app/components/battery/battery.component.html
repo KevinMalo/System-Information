@@ -1,0 +1,20 @@
+<div class="card text-center" style="margin-top: 20px;">
+  <div class="card-header">
+    Battery
+  </div>
+  <div class="card-body">
+    <div class="chart-wrapper">
+      <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+  </div>
+  </div>
+  <div class="card-footer text-muted">
+    {{ batteryData | json }}
+  </div>
+</div>

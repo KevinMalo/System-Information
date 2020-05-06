@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CpuTemperatureComponent } from './cpu-temperature.component';
+import { BatteryComponent } from './battery.component';
 
-describe('CpuTemperatureComponent', () => {
-  let component: CpuTemperatureComponent;
-  let fixture: ComponentFixture<CpuTemperatureComponent>;
+describe('BatteryComponent', () => {
+  let component: BatteryComponent;
+  let fixture: ComponentFixture<BatteryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CpuTemperatureComponent ]
+      declarations: [ BatteryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CpuTemperatureComponent);
+    fixture = TestBed.createComponent(BatteryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

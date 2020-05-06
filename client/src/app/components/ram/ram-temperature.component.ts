@@ -1,13 +1,14 @@
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { SystemInfoService } from '../../services/system-info.service';
+
 
 @Component({
-  selector: 'app-cpu-temperature',
-  templateUrl: './cpu-temperature.component.html',
-  styleUrls: ['./cpu-temperature.component.css']
+  selector: 'app-ram',
+  templateUrl: './ram-temperature.component.html',
+  styleUrls: ['./ram-temperature.component.css']
 })
 export class CpuTemperatureComponent implements OnInit, OnDestroy {
 
@@ -36,7 +37,7 @@ export class CpuTemperatureComponent implements OnInit, OnDestroy {
   lineChartPlugins = [];
   lineChartType = 'line';
 
-  constructor( private http: HttpClient ) { }
+  constructor( private _SystemInfoService: SystemInfoService ) { }
 
   currentDate(): string {
 
@@ -63,13 +64,15 @@ export class CpuTemperatureComponent implements OnInit, OnDestroy {
   }
 
   private showData(): void {
-    this.getFromAPI().subscribe(response => {
+    this.getFromServices().subscribe(response => {
 
       const date: string = this.currentDate();
 
-      this.lineChartData[0].data.push( response.available);
+      this.lineChartData[0].data.push( response[1].available);
       this.lineChartLabels.push( date );
-      this.memData = response;
+      this.memData = response[1];
+
+      console.log( response );
 
     }, error => {
      console.error('ERROR: Unexpected response');
@@ -77,11 +80,8 @@ export class CpuTemperatureComponent implements OnInit, OnDestroy {
   }
 
 
-  private getFromAPI(): Observable<any>{
-    return this.http.get(
-      'http://localhost:4000',
-      { responseType: 'json' }
-    );
+  private getFromServices(): Observable<any>{
+    return this._SystemInfoService.getFromAPI();
   }
 
   ngOnInit(): void {
